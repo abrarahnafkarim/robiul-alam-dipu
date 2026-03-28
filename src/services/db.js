@@ -1,6 +1,11 @@
-import { collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, query, orderBy } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, query, orderBy, enableIndexedDbPersistence } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
+
+// Enable offline persistence so queued writes aren't lost on refresh if offline
+enableIndexedDbPersistence(db).catch((err) => {
+  console.warn("Firebase persistence error:", err.code);
+});
 
 // ═══════════════════════════════════════════════════════════════
 // Request deduplication cache — prevents duplicate in-flight requests

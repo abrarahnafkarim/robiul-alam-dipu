@@ -15,11 +15,11 @@ const Hero = () => {
     getHeroData().then(data => {
       if (data && Object.keys(data).length > 0) {
         setHeroData(prev => ({
-          greeting: data.greeting || prev.greeting,
-          name: data.name || prev.name,
-          title: data.title || prev.title,
-          description: data.description || prev.description,
-          photoUrl: data.photoUrl || prev.photoUrl,
+          greeting: data.greeting !== undefined ? data.greeting : prev.greeting,
+          name: data.name !== undefined ? data.name : prev.name,
+          title: data.title !== undefined ? data.title : prev.title,
+          description: data.description !== undefined ? data.description : prev.description,
+          photoUrl: data.photoUrl !== undefined ? data.photoUrl : prev.photoUrl,
         }));
       }
     });

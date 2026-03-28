@@ -23,7 +23,7 @@ const About = () => {
           ...prev,
           ...data,
           tabs: { ...prev.tabs, ...(data.tabs || {}) },
-          photoUrl: data.photoUrl || prev.photoUrl,
+          photoUrl: data.photoUrl !== undefined ? data.photoUrl : prev.photoUrl,
         }));
       }
     });
