@@ -34,8 +34,13 @@ const About = () => {
       <div className="container grid grid-cols-2" style={{ alignItems: 'center' }}>
         
         <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ position: 'absolute', top: '10%', left: '15%', width: '280px', height: '280px', backgroundColor: 'rgba(212, 175, 55, 0.15)', zIndex: 0, borderRadius: '50%', border: '1px solid rgba(212, 175, 55, 0.4)' }} />
-          {aboutData.photoUrl && <img src={aboutData.photoUrl} alt="About Me" style={{ width: '100%', maxWidth: '280px', aspectRatio: '1/1', objectFit: 'cover', objectPosition: 'top center', borderRadius: '50%', position: 'relative', zIndex: 1, boxShadow: '0 20px 40px rgba(0,0,0,0.3)', border: '6px solid var(--color-surface)' }} />}
+          <div style={{ position: 'absolute', top: '5%', left: '10%', width: '280px', height: '280px', backgroundColor: 'rgba(212, 175, 55, 0.15)', zIndex: 0, borderRadius: '50%', border: '1px solid rgba(212, 175, 55, 0.4)' }} />
+          
+          <div style={{ width: '280px', height: '280px', position: 'relative', zIndex: 1, borderRadius: '50%', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+            {aboutData.photoUrl && (
+              <img src={aboutData.photoUrl} alt="About Me" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+            )}
+          </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }}>
