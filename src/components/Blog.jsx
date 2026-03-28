@@ -5,9 +5,7 @@ import { getBlogs } from '../services/db';
 import { FiX, FiCalendar, FiArrowRight } from 'react-icons/fi';
 
 const Blog = () => {
-  const [blogs, setBlogs] = useState([
-    { id: 1, title: 'The Future of Web Design', contentSnippet: 'Exploring the new trends in UI/UX designing...', content: '', date: 'Mar 15, 2024', coverImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&w=600' }
-  ]);
+  const [blogs, setBlogs] = useState([]);
   const [expandedBlog, setExpandedBlog] = useState(null);
 
   useEffect(() => {

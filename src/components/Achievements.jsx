@@ -20,10 +20,7 @@ const getYouTubeEmbedUrl = (url) => {
 };
 
 const Achievements = () => {
-  const [achievements, setAchievements] = useState([
-    { id: 1, title: 'Best Designer 2023', description: 'Awarded by Awwwards for creative design.', date: 'Dec 2023', mediaUrl: 'https://images.unsplash.com/photo-1542626991-cbc4e32524cc?ixlib=rb-4.0.3&w=600' },
-    { id: 2, title: 'Top 10 Portfolio', description: 'Featured in CSS Design Awards.', date: 'Oct 2022', mediaUrl: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&w=600' }
-  ]);
+  const [achievements, setAchievements] = useState([]);
 
   useEffect(() => {
     getAchievements().then(data => {
