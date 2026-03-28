@@ -48,12 +48,8 @@ const Hero = () => {
           </p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          {heroData.photoUrl && (
-            <div className="hero-image-container">
-              <img src={heroData.photoUrl} alt={heroData.name} className="hero-image" />
-            </div>
-          )}
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
+          {heroData.photoUrl && <img src={heroData.photoUrl} alt={heroData.name} className="hero-image" style={{ maxWidth: '100%', height: 'auto', maxHeight: '85vh', objectFit: 'contain', objectPosition: 'bottom', display: 'block', filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.15))' }} />}
         </motion.div>
 
       </div>
