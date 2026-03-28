@@ -33,9 +33,9 @@ const About = () => {
     <section className="section" style={{ backgroundColor: 'var(--color-background)' }} id="about">
       <div className="container grid grid-cols-2" style={{ alignItems: 'center' }}>
         
-        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }} style={{ position: 'relative' }}>
-          <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '150px', height: '150px', backgroundColor: 'rgba(212, 175, 55, 0.15)', zIndex: 0, border: '1px solid rgba(212, 175, 55, 0.3)' }} />
-          {aboutData.photoUrl && <img src={aboutData.photoUrl} alt="About Me" style={{ width: '100%', maxWidth: '500px', height: 'auto', borderRadius: 'var(--radius-md)', position: 'relative', zIndex: 1, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />}
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }} style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ position: 'absolute', bottom: '0', left: '0', width: '250px', height: '250px', backgroundColor: 'rgba(212, 175, 55, 0.15)', zIndex: 0, borderRadius: '50%', border: '1px solid rgba(212, 175, 55, 0.3)' }} />
+          {aboutData.photoUrl && <img src={aboutData.photoUrl} alt="About Me" style={{ width: '100%', maxWidth: '400px', aspectRatio: '1/1', objectFit: 'cover', borderRadius: '50%', position: 'relative', zIndex: 1, boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '4px solid var(--color-surface)' }} />}
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }}>
