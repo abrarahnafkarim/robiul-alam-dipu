@@ -10,9 +10,9 @@ const About = () => {
     description: "Far far away, behind the word mountains...",
     highlight: "I Do Web Design & Developement since I was 18 Years Old",
     tabs: {
-      about: "I am a passionate web designer with a knack for creating beautiful, dynamic user interfaces.",
+      about: "I am a passionate entrepreneur with a knack for creating beautiful, dynamic user interfaces.",
       skills: "React, Next.js, Firebase, Framer Motion, Vanilla CSS, Figma",
-      experience: "Senior Frontend Developer at TechCorp (2020-Present)"
+      experience: "CEO at TechCorp (2020-Present)"
     }
   });
 
