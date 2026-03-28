@@ -53,8 +53,8 @@ const Navbar = () => {
         Robiul<span style={{ color: 'var(--color-primary)' }}>.</span>
       </a>
 
-      {/* Desktop Nav */}
-      <div className="nav-desktop" style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+      {/* Unified Nav */}
+      <div className="nav-links-container" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
         {navLinks.map((item) => (
           <a 
             key={item} 
@@ -96,63 +96,6 @@ const Navbar = () => {
           {theme === 'dark' ? <FiSun size={18} /> : <FiMoon size={18} />}
         </button>
       </div>
-
-      {/* Mobile toggle */}
-      <button
-        className="nav-mobile-toggle"
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label="Toggle menu"
-        style={{
-          display: 'none',
-          background: 'none',
-          border: 'none',
-          color: 'var(--color-text)',
-          cursor: 'pointer',
-          padding: '0.25rem',
-        }}
-      >
-        {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-      </button>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="nav-mobile-menu" style={{
-          position: 'absolute', top: '100%', left: 0, right: 0,
-          backgroundColor: theme === 'dark' ? 'rgba(11, 14, 20, 0.95)' : 'rgba(248, 250, 252, 0.95)',
-          backdropFilter: 'blur(12px)',
-          padding: '1.5rem 2rem',
-          display: 'flex', flexDirection: 'column', gap: '1rem',
-          borderBottom: '1px solid rgba(212, 175, 55, 0.15)',
-        }}>
-          {navLinks.map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setMobileOpen(false)}
-              style={{ 
-                color: 'var(--color-text-light)', 
-                fontSize: '1rem', 
-                fontWeight: 500,
-                textDecoration: 'none',
-                padding: '0.5rem 0',
-              }}
-            >
-              {item}
-            </a>
-          ))}
-          <button 
-            onClick={() => { toggleTheme(); setMobileOpen(false); }}
-            style={{
-              background: 'none', border: 'none',
-              color: 'var(--color-primary)', cursor: 'pointer',
-              display: 'flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.5rem 0', fontSize: '1rem',
-            }}
-          >
-            {theme === 'dark' ? <><FiSun size={16} /> Light Mode</> : <><FiMoon size={16} /> Dark Mode</>}
-          </button>
-        </div>
-      )}
     </motion.nav>
   );
 };

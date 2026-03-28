@@ -370,13 +370,13 @@ a:hover {
     padding: 3rem 0;
   }
 
-  /* Navbar mobile */
-  .nav-desktop {
-    display: none !important;
+  /* Navbar mobile - keep horizontal layout */
+  .nav-links-container {
+    gap: 0.75rem !important;
   }
-
-  .nav-mobile-toggle {
-    display: flex !important;
+  .nav-links-container a {
+    font-size: 0.8rem !important;
+    letter-spacing: 0.5px !important;
   }
 
   /* Admin — responsive sidebar */
