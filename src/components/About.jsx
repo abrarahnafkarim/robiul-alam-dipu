@@ -39,11 +39,12 @@ const About = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }}>
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+          <div className="about-tabs-container" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
             {['about', 'skills', 'experience'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
+                className={`about-tab-btn ${activeTab === tab ? 'active' : ''}`}
                 style={{
                   padding: '0.5rem 1rem', border: 'none', backgroundColor: activeTab === tab ? 'var(--color-primary)' : 'transparent',
                   color: activeTab === tab ? 'var(--color-white)' : 'var(--color-text-light)', fontWeight: '600',
@@ -55,12 +56,12 @@ const About = () => {
             ))}
           </div>
 
-          <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>{aboutData.title}</h2>
-          <p style={{ fontSize: '1.125rem', lineHeight: '1.8', marginBottom: '2rem' }}>{aboutData.description}</p>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '2rem' }}>{aboutData.highlight}</h3>
+          <h2 className="about-title" style={{ marginBottom: '1.5rem' }}>{aboutData.title}</h2>
+          <p className="about-description" style={{ lineHeight: '1.8', marginBottom: '2rem' }}>{aboutData.description}</p>
+          <h3 className="about-highlight" style={{ fontWeight: '700', marginBottom: '2rem' }}>{aboutData.highlight}</h3>
 
           <div style={{ padding: '1.5rem', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', minHeight: '120px' }}>
-            <p style={{ margin: 0, color: 'var(--color-text)', whiteSpace: 'pre-line' }}>{aboutData.tabs && aboutData.tabs[activeTab]}</p>
+            <p className="about-tab-content" style={{ margin: 0, color: 'var(--color-text)', whiteSpace: 'pre-line' }}>{aboutData.tabs && aboutData.tabs[activeTab]}</p>
           </div>
           
         </motion.div>
