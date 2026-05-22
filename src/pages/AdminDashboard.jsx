@@ -211,10 +211,18 @@ const AdminDashboard = () => {
             border: '1px solid #334155',
             minHeight: 'calc(100vh - 4rem)',
           }}>
-            {activeSection === 'hero' && <HeroEditor />}
-            {activeSection === 'about' && <AboutEditor />}
-            {activeSection === 'achievements' && <AchievementEditor />}
-            {activeSection === 'blog' && <BlogEditor />}
+            <div style={{ display: activeSection === 'hero' ? 'block' : 'none' }}>
+              <HeroEditor />
+            </div>
+            <div style={{ display: activeSection === 'about' ? 'block' : 'none' }}>
+              <AboutEditor />
+            </div>
+            <div style={{ display: activeSection === 'achievements' ? 'block' : 'none' }}>
+              <AchievementEditor />
+            </div>
+            <div style={{ display: activeSection === 'blog' ? 'block' : 'none' }}>
+              <BlogEditor />
+            </div>
           </div>
         </div>
       </main>
