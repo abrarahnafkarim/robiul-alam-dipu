@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { auth } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
-import { FiHome, FiUser, FiAward, FiEdit3, FiLogOut, FiMenu, FiX, FiShield } from 'react-icons/fi';
-import HeroEditor from '../components/admin/HeroEditor';
-import AboutEditor from '../components/admin/AboutEditor';
+import { FiAward, FiEdit3, FiLogOut, FiMenu, FiX, FiShield } from 'react-icons/fi';
 import AchievementEditor from '../components/admin/AchievementEditor';
 import BlogEditor from '../components/admin/BlogEditor';
 
 const AdminDashboard = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('achievements');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -27,8 +25,6 @@ const AdminDashboard = () => {
   };
 
   const menuItems = [
-    { id: 'hero', label: 'Hero Section', icon: FiHome },
-    { id: 'about', label: 'About Section', icon: FiUser },
     { id: 'achievements', label: 'Achievements', icon: FiAward },
     { id: 'blog', label: 'Blog Editor', icon: FiEdit3 },
   ];
@@ -211,12 +207,6 @@ const AdminDashboard = () => {
             border: '1px solid #334155',
             minHeight: 'calc(100vh - 4rem)',
           }}>
-            <div style={{ display: activeSection === 'hero' ? 'block' : 'none' }}>
-              <HeroEditor />
-            </div>
-            <div style={{ display: activeSection === 'about' ? 'block' : 'none' }}>
-              <AboutEditor />
-            </div>
             <div style={{ display: activeSection === 'achievements' ? 'block' : 'none' }}>
               <AchievementEditor />
             </div>
