@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { getAboutData } from '../services/db';
 
 const About = () => {
   const [activeTab, setActiveTab] = useState('about');
-  const [aboutData, setAboutData] = useState({
+  const aboutData = {
     photoUrl: "/about-me-photo.png",
     title: "My Story",
     description: "Far far away, behind the word mountains...",
@@ -14,20 +13,7 @@ const About = () => {
       skills: "React, Next.js, Firebase, Framer Motion, Vanilla CSS, Figma",
       experience: "CEO at TechCorp (2020-Present)"
     }
-  });
-
-  useEffect(() => {
-    getAboutData().then(data => {
-      if (data && Object.keys(data).length > 0) {
-        setAboutData(prev => ({
-          ...prev,
-          ...data,
-          tabs: { ...prev.tabs, ...(data.tabs || {}) },
-          photoUrl: data.photoUrl !== undefined ? data.photoUrl : prev.photoUrl,
-        }));
-      }
-    });
-  }, []);
+  };
 
   return (
     <section className="section" style={{ backgroundColor: 'var(--color-background)' }} id="about">

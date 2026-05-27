@@ -1,29 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { getHeroData } from '../services/db';
 
 const Hero = () => {
-  const [heroData, setHeroData] = useState({
+  const heroData = {
     greeting: "WELCOME TO MY WORLD",
     name: "SYED MOHAMMAD ROBIUL ALAM",
     title: "An Entrepreneur",
     description: "Far far away, behind the word mountains, far from the countries.",
     photoUrl: "/hero-transparent-fixed.png",
-  });
-
-  useEffect(() => {
-    getHeroData().then(data => {
-      if (data && Object.keys(data).length > 0) {
-        setHeroData(prev => ({
-          greeting: data.greeting !== undefined ? data.greeting : prev.greeting,
-          name: data.name !== undefined ? data.name : prev.name,
-          title: data.title !== undefined ? data.title : prev.title,
-          description: data.description !== undefined ? data.description : prev.description,
-          photoUrl: data.photoUrl !== undefined ? data.photoUrl : prev.photoUrl,
-        }));
-      }
-    });
-  }, []);
+  };
 
   return (
     <section className="hero-section" style={{
