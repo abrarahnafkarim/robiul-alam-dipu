@@ -235,7 +235,7 @@ export const sanitizeUrl = (url) => {
     }
     
     if (fileId) {
-      return `https://docs.google.com/uc?export=download&id=${fileId}`;
+      return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
     }
   }
 
