@@ -221,13 +221,23 @@ const BlogEditor = () => {
               💡 <strong>Free Image Hosting:</strong> Upload your photo for free on <a href="https://postimages.org/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>postimages.org</a> or <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>imgbb.com</a>, and paste the <strong>Direct Link</strong> (the URL ending in `.png`, `.jpg`, `.jpeg`, or `.webp`) below.
             </div>
 
-            <input type="url" value={coverImageUrl} onChange={e => setCoverImageUrl(e.target.value)} style={inputStyle} placeholder="https://example.com/image.jpg" {...focusHandlers} />
+            <input 
+              type="url" 
+              value={coverImageUrl} 
+              onChange={e => setCoverImageUrl(e.target.value)} 
+              onBlur={e => {
+                const sanitized = sanitizeUrl(e.target.value.trim());
+                if (sanitized) setCoverImageUrl(sanitized);
+              }}
+              style={inputStyle} 
+              placeholder="https://example.com/image.jpg" 
+              {...focusHandlers} />
 
             {/* Preview */}
             {coverImageUrl && (
               <div style={{ marginTop: '0.75rem' }}>
                 <img
-                  src={coverImageUrl}
+                  src={sanitizeUrl(coverImageUrl) || coverImageUrl}
                   alt="Cover preview"
                   style={{ maxHeight: '150px', borderRadius: '8px', objectFit: 'contain' }}
                   onError={e => e.target.style.display = 'none'}

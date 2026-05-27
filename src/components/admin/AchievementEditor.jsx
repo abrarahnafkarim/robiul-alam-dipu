@@ -262,7 +262,18 @@ const AchievementEditor = () => {
               💡 <strong>Free Image Hosting:</strong> Upload your photo for free on <a href="https://postimages.org/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>postimages.org</a> or <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>imgbb.com</a>, and paste the <strong>Direct Link</strong> (the URL ending in `.png`, `.jpg`, `.jpeg`, or `.webp`) below.
             </div>
 
-            <input type="url" value={mediaUrl} onChange={e => setMediaUrl(e.target.value)} style={inputStyle} placeholder="https://example.com/image.jpg or YouTube URL" {...focusHandlers} />
+            <input 
+              type="url" 
+              value={mediaUrl} 
+              onChange={e => setMediaUrl(e.target.value)} 
+              onBlur={e => {
+                const sanitized = sanitizeUrl(e.target.value.trim());
+                if (sanitized) setMediaUrl(sanitized);
+              }}
+              style={inputStyle} 
+              placeholder="https://example.com/image.jpg or YouTube URL" 
+              {...focusHandlers} 
+            />
 
             {/* Preview */}
             {mediaUrl && (
@@ -276,7 +287,7 @@ const AchievementEditor = () => {
                     <video src={mediaUrl} controls style={{ maxHeight: '150px', borderRadius: '8px' }} />
                   )
                 ) : (
-                  <img src={mediaUrl} alt="Preview" style={{ maxHeight: '150px', borderRadius: '8px', objectFit: 'contain' }} onError={e => e.target.style.display = 'none'} />
+                  <img src={sanitizeUrl(mediaUrl) || mediaUrl} alt="Preview" style={{ maxHeight: '150px', borderRadius: '8px', objectFit: 'contain' }} onError={e => e.target.style.display = 'none'} />
                 )}
               </div>
             )}
