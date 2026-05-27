@@ -106,11 +106,9 @@ const AchievementEditor = () => {
     setMessage({ text: '', type: '' });
 
     try {
-      let finalMediaUrl = mediaUrl;
+      let finalMediaUrl = '';
 
-      if (mediaType === 'upload' && file) {
-        finalMediaUrl = await uploadFile(file, 'achievementMedia');
-      } else if (mediaType === 'url' && mediaUrl.trim()) {
+      if (mediaUrl.trim()) {
         finalMediaUrl = sanitizeUrl(mediaUrl.trim());
         if (!finalMediaUrl) throw new Error('Invalid media URL.');
       }
@@ -232,47 +230,18 @@ const AchievementEditor = () => {
 
           {/* Media Section */}
           <div style={{ backgroundColor: colors.surface, padding: '1.25rem', borderRadius: '10px', border: `1px solid ${colors.border}` }}>
-            <label style={{...labelStyle, marginBottom: '0.75rem'}}>Cover Media (Image or Video)</label>
+            <label style={{...labelStyle, marginBottom: '0.5rem'}}>Cover Media URL (Image or Video)</label>
 
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-              <button type="button" onClick={() => setMediaType('url')} style={toggleBtnStyle(mediaType === 'url')}>
-                <FiLink size={14} /> Paste URL (Free & Recommended)
-              </button>
-              <button type="button" onClick={() => setMediaType('upload')} style={toggleBtnStyle(mediaType === 'upload')}>
-                <FiUpload size={14} /> Upload File (Requires Billing)
-              </button>
+            <div style={{ fontSize: '0.78rem', color: colors.textMuted, marginBottom: '0.75rem', lineHeight: '1.4' }}>
+              💡 <strong>Free Image Hosting:</strong> Upload your photo for free on <a href="https://postimages.org/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>postimages.org</a> or <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>imgbb.com</a>, and paste the <strong>Direct Link</strong> (the URL ending in `.png`, `.jpg`, `.jpeg`, or `.webp`) below.
             </div>
 
-            {mediaType === 'url' && (
-              <div style={{ fontSize: '0.78rem', color: colors.textMuted, marginTop: '-0.5rem', marginBottom: '0.75rem', lineHeight: '1.4' }}>
-                💡 <strong>Free Image Hosting Tip:</strong> Go to <a href="https://postimages.org/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>postimages.org</a> or <a href="https://imgbb.com/" target="_blank" rel="noopener noreferrer" style={{ color: colors.primary, textDecoration: 'underline', fontWeight: '600' }}>imgbb.com</a>, upload your photo, and paste the <strong>Direct Link</strong> (the URL ending in `.png`, `.jpg`, `.jpeg`, or `.webp`) in the input below.
-              </div>
-            )}
-
-            {mediaType === 'upload' ? (
-              <div>
-                <input ref={fileInputRef} type="file" accept="image/*,video/*" onChange={handleFileChange} style={{ display: 'none' }} />
-                <button type="button" onClick={() => fileInputRef.current?.click()} style={{
-                  ...inputStyle, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem',
-                  color: colors.textMuted, border: `1px dashed ${colors.border}`,
-                }}>
-                  <FiUpload size={16} /> {file ? file.name : 'Choose image or video…'}
-                </button>
-              </div>
-            ) : (
-              <input type="url" value={mediaUrl} onChange={e => setMediaUrl(e.target.value)} style={inputStyle} placeholder="https://example.com/image.jpg or YouTube URL" {...focusHandlers} />
-            )}
+            <input type="url" value={mediaUrl} onChange={e => setMediaUrl(e.target.value)} style={inputStyle} placeholder="https://example.com/image.jpg or YouTube URL" {...focusHandlers} />
 
             {/* Preview */}
-            {(previewUrl || mediaUrl) && (
+            {mediaUrl && (
               <div style={{ marginTop: '0.75rem' }}>
-                {previewUrl ? (
-                  file?.type?.startsWith('video/') ? (
-                    <video src={previewUrl} controls style={{ maxHeight: '150px', borderRadius: '8px' }} />
-                  ) : (
-                    <img src={previewUrl} alt="Preview" style={{ maxHeight: '150px', borderRadius: '8px', objectFit: 'contain' }} />
-                  )
-                ) : mediaUrl && isVideoUrl(mediaUrl) ? (
+                {isVideoUrl(mediaUrl) ? (
                   getYouTubeEmbedUrl(mediaUrl) ? (
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: colors.textMuted, fontSize: '0.85rem' }}>
                       <FiFilm size={16} color={colors.primary} /> YouTube video linked
@@ -280,9 +249,9 @@ const AchievementEditor = () => {
                   ) : (
                     <video src={mediaUrl} controls style={{ maxHeight: '150px', borderRadius: '8px' }} />
                   )
-                ) : mediaUrl ? (
+                ) : (
                   <img src={mediaUrl} alt="Preview" style={{ maxHeight: '150px', borderRadius: '8px', objectFit: 'contain' }} onError={e => e.target.style.display = 'none'} />
-                ) : null}
+                )}
               </div>
             )}
           </div>
