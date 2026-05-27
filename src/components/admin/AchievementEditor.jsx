@@ -13,6 +13,22 @@ import {
   FiLoader, FiPlus, FiEdit2, FiTrash2, FiX, FiFilm, FiImage as FiImageIcon,
 } from 'react-icons/fi';
 
+const convertDbDateToPicker = (dateStr) => {
+  if (!dateStr) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+  
+  try {
+    const parsed = new Date(dateStr);
+    if (!isNaN(parsed.getTime())) {
+      const year = parsed.getFullYear();
+      const month = String(parsed.getMonth() + 1).padStart(2, '0');
+      const day = String(parsed.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+  } catch {}
+  return '';
+};
+
 const AchievementEditor = () => {
   const [achievements, setAchievements] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -92,7 +108,7 @@ const AchievementEditor = () => {
     setEditingId(ach.id);
     setTitle(ach.title || '');
     setDescription(ach.description || '');
-    setDate(ach.date || '');
+    setDate(convertDbDateToPicker(ach.date));
     setMediaUrl(ach.mediaUrl || '');
     setMediaType(ach.mediaUrl ? 'url' : 'upload');
     setFile(null);
@@ -113,6 +129,16 @@ const AchievementEditor = () => {
         if (!finalMediaUrl) throw new Error('Invalid media URL.');
       }
 
+      // Format YYYY-MM-DD to a beautiful localized date like "Dec 2023"
+      let formattedDate = date.trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(formattedDate)) {
+        const parsedDate = new Date(formattedDate);
+        if (!isNaN(parsedDate.getTime())) {
+          // Format as "Dec 2023"
+          formattedDate = parsedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+        }
+      }
+
       // Sanitize rich text content
       const sanitizedDescription = DOMPurify.sanitize(description, {
         ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3', 'ol', 'ul', 'li', 'blockquote', 'pre', 'code', 'a', 'img', 'iframe', 'span', 'div'],
@@ -123,7 +149,7 @@ const AchievementEditor = () => {
       const achData = {
         title: title.trim(),
         description: sanitizedDescription,
-        date: date.trim(),
+        date: formattedDate,
         mediaUrl: finalMediaUrl,
         timestamp: Date.now(),
       };
@@ -224,8 +250,8 @@ const AchievementEditor = () => {
           </div>
 
           <div>
-            <label style={labelStyle}>Date / Subtitle</label>
-            <input required type="text" value={date} onChange={e => setDate(e.target.value)} style={inputStyle} placeholder="e.g. Dec 2023" {...focusHandlers} />
+            <label style={labelStyle}>Date / Achievement Milestone</label>
+            <input required type="date" value={date} onChange={e => setDate(e.target.value)} style={inputStyle} {...focusHandlers} />
           </div>
 
           {/* Media Section */}

@@ -217,6 +217,28 @@ export const getYouTubeEmbedUrl = (url) => {
 
 export const sanitizeUrl = (url) => {
   if (!url) return '';
+  
+  // Auto-convert Google Drive public share links to direct webcontent download links
+  if (url.includes('drive.google.com') || url.includes('docs.google.com')) {
+    const driveRegex = /\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const openRegex = /[?&]id=([a-zA-Z0-9_-]+)/;
+    let fileId = null;
+    
+    const matchDrive = url.match(driveRegex);
+    if (matchDrive) {
+      fileId = matchDrive[1];
+    } else {
+      const matchOpen = url.match(openRegex);
+      if (matchOpen) {
+        fileId = matchOpen[1];
+      }
+    }
+    
+    if (fileId) {
+      return `https://docs.google.com/uc?export=download&id=${fileId}`;
+    }
+  }
+
   try {
     const parsed = new URL(url);
     if (!['http:', 'https:'].includes(parsed.protocol)) return '';

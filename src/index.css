@@ -477,3 +477,20 @@ a:hover {
   .about-title { font-size: 1.75rem; }
   .hero-bg-blob-1, .hero-bg-blob-2 { display: none; } /* Hide heavy blobs on tiny screens */
 }
+
+/* Custom scrollbar for achievements horizontal scroll */
+.achievements-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.achievements-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+.achievements-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+.achievements-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover, #E5C24A);
+}
+
